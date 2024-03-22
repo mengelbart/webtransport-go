@@ -168,9 +168,6 @@ func (s *Server) Upgrade(w http.ResponseWriter, r *http.Request) (*Session, erro
 	if r.Proto != protocolHeader {
 		return nil, fmt.Errorf("unexpected protocol: %s", r.Proto)
 	}
-	if v, ok := r.Header[webTransportDraftOfferHeaderKey]; !ok || len(v) != 1 || v[0] != "1" {
-		return nil, fmt.Errorf("missing or invalid %s header", webTransportDraftOfferHeaderKey)
-	}
 	if !s.CheckOrigin(r) {
 		return nil, errors.New("webtransport: request origin not allowed")
 	}
